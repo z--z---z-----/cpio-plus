@@ -1,4 +1,4 @@
 cpio-plus
 =========
 
-cpio extra functionallity
+cpio extra functionallity.
