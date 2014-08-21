@@ -172,6 +172,8 @@ show:
 	@echo "INSTALL_PREFIX: $(INSTALL_PREFIX)"
 	@echo "SOURCES: $(SOURCES)"
 	@echo "SRC_EXT: $(SRC_EXT)"
+	@echo "OBJECTS: $(OBJECTS)"
+	@echo "DEPS: $(DEPS)"
 
 # Main rule, checks the executable and symlinks to the output
 all: $(BIN_PATH)/$(BIN_NAME)
