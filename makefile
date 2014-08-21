@@ -62,7 +62,7 @@ install: export BIN_PATH := bin/release
 # Find all source files in the source directory, sort them by name
 # to make sure the list is always in the same order no matter the order
 # they are stored in the file system.
-SOURCES = $(sort $(wildcard $(addprefix $(SRC_PATH)/*.,$(SRC_EXT) ) ) )
+SOURCES = $(sort $(foreach ext, $(SRC_EXT), $(wildcard $(addprefix $(SRC_PATH)/*.,$(ext) ))))
 
 # Set the object file names, with the source directory stripped
 # from the path, and the build path prepended in its place
