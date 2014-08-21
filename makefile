@@ -64,11 +64,16 @@ install: export BIN_PATH := bin/release
 # they are stored in the file system.
 SOURCES = $(sort $(foreach ext, $(SRC_EXT), $(wildcard $(addprefix $(SRC_PATH)/*.,$(ext) ))))
 
-# Set the object file names, with the source directory stripped
-# from the path, and the build path prepended in its place
-OBJECTS = $(SOURCES:$(SRC_PATH)/%.$(SRC_EXT)=$(BUILD_PATH)/%.o)
+# Set the object file names, do this in two steps:
+# $(addsuffix .o,$(basename $(SOURCES))
+#  This replaces source extension into .o
+# $(patsubst $(SRC_PATH)/%.o, $(BUILD_PATH)/%.o
+#  replaces source dir to build dir
+#
+OBJECTS = $(patsubst $(SRC_PATH)/%.o, $(BUILD_PATH)/%.o, $(addsuffix .o,$(basename $(SOURCES))))
+
 # Set the dependency files that will be used to add header dependencies
-DEPS = $(OBJECTS:.o=.d)
+DEPS = $(patsubst %.o, %.d, $(OBJECTS))
 
 # Macros for timing compilation
 TIME_FILE = $(dir $@).$(notdir $@)_time
