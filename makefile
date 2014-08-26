@@ -8,7 +8,7 @@ SRC_EXT = c cpp
 # Path to the source directory, relative to the makefile
 SRC_PATH = .
 # General compiler flags
-COMPILE_FLAGS = -std=c++11 -Wall -Wextra -g
+COMPILE_FLAGS = -Wall -Wextra -Werror -g
 # Additional release-specific flags
 RCOMPILE_FLAGS = -D NDEBUG
 # Additional debug-specific flags
@@ -200,7 +200,8 @@ $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 # Source file rules
 # After the first compilation they will be joined with the rules from the
 # dependency files to provide header dependencies
-$(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
+# $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
+$(BUILD_PATH)/%.o: $(SRC_PATH)/%.cpp
 	@echo "Compiling: $< -> $@"
 	@$(START_TIME)
 	$(CMD_PREFIX)$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
